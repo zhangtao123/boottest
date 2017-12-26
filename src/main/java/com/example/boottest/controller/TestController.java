@@ -41,7 +41,7 @@ public class TestController {
             log.info("成功");
             return "success";
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("上传失败",e);
             return "failed";
         }
     }
