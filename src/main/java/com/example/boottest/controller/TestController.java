@@ -1,6 +1,8 @@
 package com.example.boottest.controller;
 
 import com.example.boottest.service.GetAllBrand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,7 @@ import static com.example.boottest.constant.Constants.UPLOAD_FILE_PATH;
 public class TestController {
     @Resource
     private GetAllBrand getAllBrand;
+    private Logger log= LoggerFactory.getLogger(TestController.class);
 
     @RequestMapping("/test")
     public Object getBrands() {
@@ -35,6 +38,7 @@ public class TestController {
         File file = new File(UPLOAD_FILE_PATH, fileName);
         try {
             uploadFile.transferTo(file);
+            log.info("成功");
             return "success";
         } catch (IOException e) {
             e.printStackTrace();
