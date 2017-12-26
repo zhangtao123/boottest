@@ -21,6 +21,7 @@ public class BoottestApplicationTests {
     @Test
     public void contextLoads() {
         BrandQuery brandQuery = new BrandQuery();
+        brandQuery.createCriteria().andDescriptionLike("23");
         brandMapper.selectByExample(brandQuery).forEach(System.out::println);
         System.out.println("service");
         getAllBrand.getAll().forEach(System.out::println);
