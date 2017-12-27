@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.example.boottest.dao")
 public class BoottestApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(BoottestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BoottestApplication.class, args);
+    }
 }

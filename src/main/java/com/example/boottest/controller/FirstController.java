@@ -17,10 +17,10 @@ import java.io.IOException;
 import static com.example.boottest.constant.Constants.UPLOAD_FILE_PATH;
 
 @RestController
-public class TestController {
+public class FirstController {
     @Resource
     private GetAllBrand getAllBrand;
-    private Logger log= LoggerFactory.getLogger(TestController.class);
+    private Logger log= LoggerFactory.getLogger(FirstController.class);
 
     @RequestMapping("/test")
     public Object getBrands() {
