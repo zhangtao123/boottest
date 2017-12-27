@@ -176,6 +176,42 @@ create index color_id
 	on bbs_sku (color_id)
 ;
 
+create table book
+(
+	id int auto_increment
+		primary key,
+	reader varchar(20) null,
+	isbn varchar(20) null,
+	title varchar(20) null,
+	author varchar(20) null,
+	description varchar(20) null
+)
+engine=InnoDB
+;
+
+create table category
+(
+	id int auto_increment
+		primary key,
+	type varchar(20) null,
+	hot tinyint(1) default '0' null
+)
+engine=InnoDB
+;
+
+create table id
+(
+	id int auto_increment
+		primary key,
+	reader varchar(20) null,
+	isbn varchar(20) null,
+	title varchar(20) null,
+	author varchar(20) null,
+	description varchar(20) null
+)
+engine=InnoDB
+;
+
 create table test
 (
 	t1 timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
