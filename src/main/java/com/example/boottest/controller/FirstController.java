@@ -1,6 +1,7 @@
 package com.example.boottest.controller;
 
 import com.example.boottest.entity.Book;
+import com.example.boottest.service.AddBook;
 import com.example.boottest.service.GetAllBrand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import static com.example.boottest.constant.Constants.UPLOAD_FILE_PATH;
 public class FirstController {
     @Resource
     private GetAllBrand getAllBrand;
+    @Resource
+    private AddBook addBook;
     private Logger log= LoggerFactory.getLogger(FirstController.class);
 
     @RequestMapping("/test")
@@ -46,5 +49,16 @@ public class FirstController {
     @RequestMapping("/json")
     public Book testJson(@RequestBody Book book){
         return book;
+    }
+    @RequestMapping("/addBook")
+    public Object addBook(@RequestBody Book book){
+        try{
+            addBook.addBook(book);
+            return "添加成功";
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(book);
+            return "添加失败";
+        }
     }
 }
