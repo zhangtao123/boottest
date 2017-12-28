@@ -3,7 +3,7 @@ package com.example.boottest;
 import com.example.boottest.dao.BrandMapper;
 import com.example.boottest.entity.Book;
 import com.example.boottest.entity.BrandQuery;
-import com.example.boottest.service.GetAllBrand;
+import com.example.boottest.service.BrandService;
 import com.example.boottest.util.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class BoottestApplicationTests {
     @Resource
     private BrandMapper brandMapper;
     @Resource
-    private GetAllBrand getAllBrand;
+    private BrandService brandService;
 
     @Test
     public void contextLoads() {
@@ -26,7 +26,7 @@ public class BoottestApplicationTests {
         brandQuery.createCriteria().andDescriptionLike("23");
         brandMapper.selectByExample(brandQuery).forEach(System.out::println);
         System.out.println("service");
-        getAllBrand.getAll().forEach(System.out::println);
+        brandService.getAll().forEach(System.out::println);
         Book book = new Book();
         book.setAuthor("123");
         book.setDescription("12321");

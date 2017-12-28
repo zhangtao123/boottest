@@ -4,6 +4,6 @@ import com.example.boottest.entity.Brand;
 
 import java.util.List;
 
-public interface GetAllBrand {
+public interface BrandService {
     List<Brand> getAll();
 }

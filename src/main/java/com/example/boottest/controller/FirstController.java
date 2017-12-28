@@ -1,8 +1,8 @@
 package com.example.boottest.controller;
 
 import com.example.boottest.entity.Book;
-import com.example.boottest.service.AddBook;
-import com.example.boottest.service.GetAllBrand;
+import com.example.boottest.service.BookService;
+import com.example.boottest.service.BrandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,14 @@ import static com.example.boottest.constant.Constants.UPLOAD_FILE_PATH;
 @RestController
 public class FirstController {
     @Resource
-    private GetAllBrand getAllBrand;
+    private BrandService brandService;
     @Resource
-    private AddBook addBook;
+    private BookService bookService;
     private Logger log= LoggerFactory.getLogger(FirstController.class);
 
     @RequestMapping("/test")
     public Object getBrands() {
-        return getAllBrand.getAll();
+        return brandService.getAll();
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -53,11 +53,11 @@ public class FirstController {
     @RequestMapping("/addBook")
     public Object addBook(@RequestBody Book book){
         try{
-            addBook.addBook(book);
+            bookService.addBook(book);
             return "添加成功";
         }catch (Exception e){
             e.printStackTrace();
-            System.out.println(book);
+            log.error(book.toString());
             return "添加失败";
         }
     }
