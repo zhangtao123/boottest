@@ -1,6 +1,7 @@
 package com.example.boottest.controller;
 
 import com.example.boottest.entity.Book;
+import com.example.boottest.entity.User;
 import com.example.boottest.service.BookService;
 import com.example.boottest.service.BrandService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 
@@ -60,5 +62,15 @@ public class FirstController {
             log.error(book.toString());
             return "添加失败";
         }
+    }
+
+    @RequestMapping("/log")
+    public Object log(@RequestBody User user, HttpServletRequest request){
+        request.getSession().setAttribute("userName",user.getUserName());
+        return "请求成功";
+    }
+    @RequestMapping("/testSession")
+    public Object testSession(HttpServletRequest request){
+        return request.getSession().getAttribute("userName");
     }
 }
