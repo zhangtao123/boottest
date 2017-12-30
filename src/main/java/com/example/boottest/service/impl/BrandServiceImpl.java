@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service("brandService")
+@Transactional
 public class BrandServiceImpl implements BrandService {
     @Resource
     private BrandMapper brandMapper;

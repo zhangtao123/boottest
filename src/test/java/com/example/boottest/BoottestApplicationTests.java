@@ -4,6 +4,7 @@ import com.example.boottest.dao.BrandMapper;
 import com.example.boottest.entity.Book;
 import com.example.boottest.entity.BrandQuery;
 import com.example.boottest.entity.User;
+import com.example.boottest.service.BookService;
 import com.example.boottest.service.BrandService;
 import com.example.boottest.util.JsonUtil;
 import org.junit.Test;
@@ -20,6 +21,8 @@ public class BoottestApplicationTests {
     private BrandMapper brandMapper;
     @Resource
     private BrandService brandService;
+    @Resource
+    private BookService bookService;
 
     @Test
     public void contextLoads() {
@@ -32,5 +35,12 @@ public class BoottestApplicationTests {
         user.setPassword("12312");
         user.setUserName("张三");
         System.out.println(JsonUtil.toJson(user));
+    }
+    @Test
+    public void transactionTest(){
+        Book book=new Book();
+        book.setTitle("test");
+        book.setAuthor("yibo");
+        bookService.addBook(book);
     }
 }

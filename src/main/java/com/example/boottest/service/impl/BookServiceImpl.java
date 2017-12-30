@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 @Service("bookService")
+@Transactional
 public class BookServiceImpl implements BookService {
     @Resource
     private BookMapper bookMapper;
-    @Transactional
     @Override
     public void addBook(Book book){
         bookMapper.insertSelective(book);
