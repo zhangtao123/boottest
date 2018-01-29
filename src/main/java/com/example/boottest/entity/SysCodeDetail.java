@@ -3,12 +3,14 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class SysCodeDetail implements Serializable {
     private Long id;
+
+    private Long sysCodeId;
 
     private String code;
 
-    private String name;
+    private String value;
 
     private Byte status;
 
@@ -30,6 +32,14 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
+    public Long getSysCodeId() {
+        return sysCodeId;
+    }
+
+    public void setSysCodeId(Long sysCodeId) {
+        this.sysCodeId = sysCodeId;
+    }
+
     public String getCode() {
         return code;
     }
@@ -38,12 +48,12 @@ public class Brand implements Serializable {
         this.code = code == null ? null : code.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setValue(String value) {
+        this.value = value == null ? null : value.trim();
     }
 
     public Byte getStatus() {
@@ -93,8 +103,9 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", sysCodeId=").append(sysCodeId);
         sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", value=").append(value);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

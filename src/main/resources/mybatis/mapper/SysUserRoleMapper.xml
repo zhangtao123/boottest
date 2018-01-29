@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.boottest.dao.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+<mapper namespace="com.example.boottest.dao.SysUserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.SysUserRole">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, user_id, role_id, status, create_user, create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.SysUserRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,38 +89,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from sys_user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from sys_user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.SysUserRoleExample">
+    delete from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
+  <insert id="insert" parameterType="com.example.boottest.entity.SysUserRole">
+    insert into sys_user_role (id, user_id, role_id, 
       status, create_user, create_time, 
       last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
       #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.SysUserRole">
+    insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="code != null">
-        code,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="roleId != null">
+        role_id,
       </if>
       <if test="status != null">
         status,
@@ -142,11 +142,11 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -165,23 +165,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.SysUserRoleExample" resultType="java.lang.Long">
+    select count(*) from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update sys_user_role
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -204,10 +204,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update sys_user_role
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -217,14 +217,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.SysUserRole">
+    update sys_user_role
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -244,10 +244,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.SysUserRole">
+    update sys_user_role
+    set user_id = #{userId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -255,10 +255,10 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.SysUserRole">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -324,15 +324,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, user_id, role_id, status, create_user, create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.SysUserRoleQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -343,38 +343,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from sys_user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from sys_user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandQuery">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.SysUserRoleQuery">
+    delete from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
+  <insert id="insert" parameterType="com.example.boottest.entity.SysUserRole">
+    insert into sys_user_role (id, user_id, role_id, 
       status, create_user, create_time, 
       last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
       #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.SysUserRole">
+    insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="code != null">
-        code,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="roleId != null">
+        role_id,
       </if>
       <if test="status != null">
         status,
@@ -396,11 +396,11 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -419,23 +419,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandQuery" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.SysUserRoleQuery" resultType="java.lang.Long">
+    select count(*) from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update sys_user_role
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -458,10 +458,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update sys_user_role
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -471,14 +471,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.SysUserRole">
+    update sys_user_role
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -498,10 +498,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.SysUserRole">
+    update sys_user_role
+    set user_id = #{userId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

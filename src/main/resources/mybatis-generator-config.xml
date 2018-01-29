@@ -9,7 +9,7 @@
         <!-- JavaBean 实现 序列化 接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- genenat entity时,生成toString -->
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <!-- 开启支持内存分页   可生成 支持内存分布的方法及参数  
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
         -->
@@ -17,19 +17,19 @@
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 		 -->
         <!-- 此处是将Example改名为Query 当然 想改成什么都行~    -->
-        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
-            <property name="searchString" value="Example$" />
-            <!-- 替换后
+        <!--<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            &lt;!&ndash; 替换后
             <property name="replaceString" value="Criteria" />  
-             -->
-            <property name="replaceString" value="Query" />
-        </plugin>
+             &ndash;&gt;
+            <property name="replaceString" value="Query"/>
+        </plugin>-->
 
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/babasport?useSSL=false" userId="root"
+                        connectionURL="jdbc:mysql://localhost:3306/vw?useSSL=false" userId="root"
                         password="root">
         </jdbcConnection>
         <javaTypeResolver>
@@ -48,7 +48,27 @@
                              targetPackage="com.example.boottest.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table tableName="bbs_brand" domainObjectName="Brand"/>
-        <table tableName="book"/>
+        <table tableName="brand" domainObjectName="Brand"/>
+        <table tableName="check_detail_result"/>
+        <table tableName="check_item_result"/>
+        <table tableName="comp_result"/>
+        <table tableName="dealer"/>
+        <table tableName="dealer_region"/>
+        <table tableName="mission"/>
+        <table tableName="mission_schedual"/>
+        <table tableName="sys_code"/>
+        <table tableName="sys_code_detail"/>
+        <table tableName="sys_permission"/>
+        <table tableName="sys_role"/>
+        <table tableName="sys_role_permission"/>
+        <table tableName="sys_seq"/>
+        <table tableName="sys_user"/>
+        <table tableName="sys_user_brand"/>
+        <table tableName="sys_user_role"/>
+        <table tableName="template"/>
+        <table tableName="template_content"/>
+        <table tableName="template_content_detail"/>
+        <table tableName="template_content_involve"/>
+        <table tableName="template_skoda"/>
     </context>
 </generatorConfiguration>

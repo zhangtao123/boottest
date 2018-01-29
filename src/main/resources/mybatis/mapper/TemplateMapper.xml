@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.boottest.dao.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+<mapper namespace="com.example.boottest.dao.TemplateMapper">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Template">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="season" jdbcType="VARCHAR" property="season" />
+    <result column="standard_type" jdbcType="TINYINT" property="standardType" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,15 +75,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, brand_id, code, name, type, year, season, standard_type, status, create_user, 
+    create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.TemplateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,38 +95,57 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from template
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from template
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.TemplateExample">
+    delete from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
-      status, create_user, create_time, 
-      last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.boottest.entity.Template">
+    insert into template (id, brand_id, code, 
+      name, type, year, season, 
+      standard_type, status, create_user, 
+      create_time, last_update_user, last_update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{year,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, 
+      #{standardType,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.Template">
+    insert into template
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
       </if>
       <if test="code != null">
         code,
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="season != null">
+        season,
+      </if>
+      <if test="standardType != null">
+        standard_type,
       </if>
       <if test="status != null">
         status,
@@ -142,11 +167,26 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
       <if test="code != null">
         #{code,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="standardType != null">
+        #{standardType,jdbcType=TINYINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -165,23 +205,38 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.TemplateExample" resultType="java.lang.Long">
+    select count(*) from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update template
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=BIGINT},
       </if>
       <if test="record.code != null">
         code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.season != null">
+        season = #{record.season,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardType != null">
+        standard_type = #{record.standardType,jdbcType=TINYINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -204,10 +259,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update template
     set id = #{record.id,jdbcType=BIGINT},
+      brand_id = #{record.brandId,jdbcType=BIGINT},
       code = #{record.code,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      year = #{record.year,jdbcType=VARCHAR},
+      season = #{record.season,jdbcType=VARCHAR},
+      standard_type = #{record.standardType,jdbcType=TINYINT},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -217,14 +277,29 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Template">
+    update template
     <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
       <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="standardType != null">
+        standard_type = #{standardType,jdbcType=TINYINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -244,10 +319,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Template">
+    update template
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      year = #{year,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      standard_type = #{standardType,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -255,10 +335,15 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Template">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="season" jdbcType="VARCHAR" property="season" />
+    <result column="standard_type" jdbcType="TINYINT" property="standardType" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -324,15 +409,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, brand_id, code, name, type, year, season, standard_type, status, create_user, 
+    create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.TemplateQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -343,38 +429,57 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from template
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from template
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandQuery">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.TemplateQuery">
+    delete from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
-      status, create_user, create_time, 
-      last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.boottest.entity.Template">
+    insert into template (id, brand_id, code, 
+      name, type, year, season, 
+      standard_type, status, create_user, 
+      create_time, last_update_user, last_update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{year,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, 
+      #{standardType,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.Template">
+    insert into template
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
       </if>
       <if test="code != null">
         code,
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="season != null">
+        season,
+      </if>
+      <if test="standardType != null">
+        standard_type,
       </if>
       <if test="status != null">
         status,
@@ -396,11 +501,26 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
       <if test="code != null">
         #{code,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="standardType != null">
+        #{standardType,jdbcType=TINYINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -419,23 +539,38 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandQuery" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.TemplateQuery" resultType="java.lang.Long">
+    select count(*) from template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update template
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=BIGINT},
       </if>
       <if test="record.code != null">
         code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.season != null">
+        season = #{record.season,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardType != null">
+        standard_type = #{record.standardType,jdbcType=TINYINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -458,10 +593,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update template
     set id = #{record.id,jdbcType=BIGINT},
+      brand_id = #{record.brandId,jdbcType=BIGINT},
       code = #{record.code,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      year = #{record.year,jdbcType=VARCHAR},
+      season = #{record.season,jdbcType=VARCHAR},
+      standard_type = #{record.standardType,jdbcType=TINYINT},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -471,14 +611,29 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Template">
+    update template
     <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
       <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="standardType != null">
+        standard_type = #{standardType,jdbcType=TINYINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -498,10 +653,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Template">
+    update template
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      year = #{year,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      standard_type = #{standardType,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

@@ -3,12 +3,12 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class SysUserRole implements Serializable {
     private Long id;
 
-    private String code;
+    private Long userId;
 
-    private String name;
+    private Long roleId;
 
     private Byte status;
 
@@ -30,20 +30,20 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public Byte getStatus() {
@@ -93,8 +93,8 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", userId=").append(userId);
+        sb.append(", roleId=").append(roleId);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

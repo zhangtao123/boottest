@@ -1,14 +1,14 @@
 package com.example.boottest.dao;
 
 import com.example.boottest.entity.Brand;
-import com.example.boottest.entity.BrandQuery;
+import com.example.boottest.entity.BrandExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BrandMapper {
-    long countByExample(BrandQuery example);
+    long countByExample(BrandExample example);
 
-    int deleteByExample(BrandQuery example);
+    int deleteByExample(BrandExample example);
 
     int deleteByPrimaryKey(Long id);
 
@@ -16,13 +16,13 @@ public interface BrandMapper {
 
     int insertSelective(Brand record);
 
-    List<Brand> selectByExample(BrandQuery example);
+    List<Brand> selectByExample(BrandExample example);
 
     Brand selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") Brand record, @Param("example") BrandQuery example);
+    int updateByExampleSelective(@Param("record") Brand record, @Param("example") BrandExample example);
 
-    int updateByExample(@Param("record") Brand record, @Param("example") BrandQuery example);
+    int updateByExample(@Param("record") Brand record, @Param("example") BrandExample example);
 
     int updateByPrimaryKeySelective(Brand record);
 

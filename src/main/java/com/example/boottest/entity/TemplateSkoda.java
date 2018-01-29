@@ -3,12 +3,12 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class TemplateSkoda implements Serializable {
     private Long id;
 
-    private String code;
+    private Long templateId;
 
-    private String name;
+    private String templateName;
 
     private Byte status;
 
@@ -30,20 +30,20 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Long getTemplateId() {
+        return templateId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setTemplateId(Long templateId) {
+        this.templateId = templateId;
     }
 
-    public String getName() {
-        return name;
+    public String getTemplateName() {
+        return templateName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName == null ? null : templateName.trim();
     }
 
     public Byte getStatus() {
@@ -93,8 +93,8 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", templateId=").append(templateId);
+        sb.append(", templateName=").append(templateName);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

@@ -1,14 +1,25 @@
 package com.example.boottest.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class TemplateContentDetail implements Serializable {
     private Long id;
 
-    private String code;
+    private Long templateContentId;
 
-    private String name;
+    private String number;
+
+    private String criterion;
+
+    private Byte isImportant;
+
+    private Byte splitScore;
+
+    private BigDecimal score;
+
+    private Byte sort;
 
     private Byte status;
 
@@ -30,20 +41,60 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Long getTemplateContentId() {
+        return templateContentId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setTemplateContentId(Long templateContentId) {
+        this.templateContentId = templateContentId;
     }
 
-    public String getName() {
-        return name;
+    public String getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setNumber(String number) {
+        this.number = number == null ? null : number.trim();
+    }
+
+    public String getCriterion() {
+        return criterion;
+    }
+
+    public void setCriterion(String criterion) {
+        this.criterion = criterion == null ? null : criterion.trim();
+    }
+
+    public Byte getIsImportant() {
+        return isImportant;
+    }
+
+    public void setIsImportant(Byte isImportant) {
+        this.isImportant = isImportant;
+    }
+
+    public Byte getSplitScore() {
+        return splitScore;
+    }
+
+    public void setSplitScore(Byte splitScore) {
+        this.splitScore = splitScore;
+    }
+
+    public BigDecimal getScore() {
+        return score;
+    }
+
+    public void setScore(BigDecimal score) {
+        this.score = score;
+    }
+
+    public Byte getSort() {
+        return sort;
+    }
+
+    public void setSort(Byte sort) {
+        this.sort = sort;
     }
 
     public Byte getStatus() {
@@ -93,8 +144,13 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", templateContentId=").append(templateContentId);
+        sb.append(", number=").append(number);
+        sb.append(", criterion=").append(criterion);
+        sb.append(", isImportant=").append(isImportant);
+        sb.append(", splitScore=").append(splitScore);
+        sb.append(", score=").append(score);
+        sb.append(", sort=").append(sort);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

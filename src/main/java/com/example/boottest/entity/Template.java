@@ -3,12 +3,22 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class Template implements Serializable {
     private Long id;
+
+    private Long brandId;
 
     private String code;
 
     private String name;
+
+    private Byte type;
+
+    private String year;
+
+    private String season;
+
+    private Byte standardType;
 
     private Byte status;
 
@@ -30,6 +40,14 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
     public String getCode() {
         return code;
     }
@@ -44,6 +62,38 @@ public class Brand implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season == null ? null : season.trim();
+    }
+
+    public Byte getStandardType() {
+        return standardType;
+    }
+
+    public void setStandardType(Byte standardType) {
+        this.standardType = standardType;
     }
 
     public Byte getStatus() {
@@ -93,8 +143,13 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", brandId=").append(brandId);
         sb.append(", code=").append(code);
         sb.append(", name=").append(name);
+        sb.append(", type=").append(type);
+        sb.append(", year=").append(year);
+        sb.append(", season=").append(season);
+        sb.append(", standardType=").append(standardType);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

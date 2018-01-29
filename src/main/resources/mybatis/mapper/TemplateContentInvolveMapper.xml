@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.boottest.dao.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+<mapper namespace="com.example.boottest.dao.TemplateContentInvolveMapper">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.TemplateContentInvolve">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="template_skoda_id" jdbcType="VARCHAR" property="templateSkodaId" />
+    <result column="template_content_id" jdbcType="BIGINT" property="templateContentId" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="is_involve" jdbcType="VARCHAR" property="isInvolve" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,15 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, template_skoda_id, template_content_id, weight, is_involve, status, create_user, 
+    create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,38 +92,46 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from template_content_involve
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from template_content_involve
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveExample">
+    delete from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
-      status, create_user, create_time, 
-      last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    insert into template_content_involve (id, template_skoda_id, template_content_id, 
+      weight, is_involve, status, 
+      create_user, create_time, last_update_user, 
+      last_update_time)
+    values (#{id,jdbcType=BIGINT}, #{templateSkodaId,jdbcType=VARCHAR}, #{templateContentId,jdbcType=BIGINT}, 
+      #{weight,jdbcType=DECIMAL}, #{isInvolve,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateUser,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    insert into template_content_involve
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="code != null">
-        code,
+      <if test="templateSkodaId != null">
+        template_skoda_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="templateContentId != null">
+        template_content_id,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="isInvolve != null">
+        is_involve,
       </if>
       <if test="status != null">
         status,
@@ -142,11 +153,17 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+      <if test="templateSkodaId != null">
+        #{templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="templateContentId != null">
+        #{templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="isInvolve != null">
+        #{isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -165,23 +182,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveExample" resultType="java.lang.Long">
+    select count(*) from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update template_content_involve
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.templateSkodaId != null">
+        template_skoda_id = #{record.templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.templateContentId != null">
+        template_content_id = #{record.templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isInvolve != null">
+        is_involve = #{record.isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -204,10 +227,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update template_content_involve
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      template_skoda_id = #{record.templateSkodaId,jdbcType=VARCHAR},
+      template_content_id = #{record.templateContentId,jdbcType=BIGINT},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      is_involve = #{record.isInvolve,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -217,14 +242,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    update template_content_involve
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="templateSkodaId != null">
+        template_skoda_id = #{templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="templateContentId != null">
+        template_content_id = #{templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="isInvolve != null">
+        is_involve = #{isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -244,10 +275,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    update template_content_involve
+    set template_skoda_id = #{templateSkodaId,jdbcType=VARCHAR},
+      template_content_id = #{templateContentId,jdbcType=BIGINT},
+      weight = #{weight,jdbcType=DECIMAL},
+      is_involve = #{isInvolve,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -255,10 +288,12 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <resultMap id="BaseResultMap" type="com.example.boottest.entity.Brand">
+  <resultMap id="BaseResultMap" type="com.example.boottest.entity.TemplateContentInvolve">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="template_skoda_id" jdbcType="VARCHAR" property="templateSkodaId" />
+    <result column="template_content_id" jdbcType="BIGINT" property="templateContentId" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="is_involve" jdbcType="VARCHAR" property="isInvolve" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -324,15 +359,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, status, create_user, create_time, last_update_user, last_update_time
+    id, template_skoda_id, template_content_id, weight, is_involve, status, create_user, 
+    create_time, last_update_user, last_update_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.boottest.entity.BrandQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -343,38 +379,46 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from brand
+    from template_content_involve
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from brand
+    delete from template_content_involve
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.boottest.entity.BrandQuery">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveQuery">
+    delete from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.boottest.entity.Brand">
-    insert into brand (id, code, name, 
-      status, create_user, create_time, 
-      last_update_user, last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    insert into template_content_involve (id, template_skoda_id, template_content_id, 
+      weight, is_involve, status, 
+      create_user, create_time, last_update_user, 
+      last_update_time)
+    values (#{id,jdbcType=BIGINT}, #{templateSkodaId,jdbcType=VARCHAR}, #{templateContentId,jdbcType=BIGINT}, 
+      #{weight,jdbcType=DECIMAL}, #{isInvolve,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateUser,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.boottest.entity.Brand">
-    insert into brand
+  <insert id="insertSelective" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    insert into template_content_involve
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="code != null">
-        code,
+      <if test="templateSkodaId != null">
+        template_skoda_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="templateContentId != null">
+        template_content_id,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="isInvolve != null">
+        is_involve,
       </if>
       <if test="status != null">
         status,
@@ -396,11 +440,17 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+      <if test="templateSkodaId != null">
+        #{templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="templateContentId != null">
+        #{templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="isInvolve != null">
+        #{isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -419,23 +469,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.boottest.entity.BrandQuery" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.boottest.entity.TemplateContentInvolveQuery" resultType="java.lang.Long">
+    select count(*) from template_content_involve
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update template_content_involve
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.templateSkodaId != null">
+        template_skoda_id = #{record.templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.templateContentId != null">
+        template_content_id = #{record.templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isInvolve != null">
+        is_involve = #{record.isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
@@ -458,10 +514,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update template_content_involve
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      template_skoda_id = #{record.templateSkodaId,jdbcType=VARCHAR},
+      template_content_id = #{record.templateContentId,jdbcType=BIGINT},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      is_involve = #{record.isInvolve,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -471,14 +529,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.Brand">
-    update brand
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    update template_content_involve
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="templateSkodaId != null">
+        template_skoda_id = #{templateSkodaId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="templateContentId != null">
+        template_content_id = #{templateContentId,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="isInvolve != null">
+        is_involve = #{isInvolve,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
@@ -498,10 +562,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Brand">
-    update brand
-    set code = #{code,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.TemplateContentInvolve">
+    update template_content_involve
+    set template_skoda_id = #{templateSkodaId,jdbcType=VARCHAR},
+      template_content_id = #{templateContentId,jdbcType=BIGINT},
+      weight = #{weight,jdbcType=DECIMAL},
+      is_involve = #{isInvolve,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

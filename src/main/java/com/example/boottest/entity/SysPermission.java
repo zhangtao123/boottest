@@ -3,12 +3,28 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class SysPermission implements Serializable {
     private Long id;
 
     private String code;
 
     private String name;
+
+    private Byte permissionType;
+
+    private String url;
+
+    private String permissionKey;
+
+    private Byte sortNo;
+
+    private Byte parentId;
+
+    private String permissionClass;
+
+    private String targetPage;
+
+    private String description;
 
     private Byte status;
 
@@ -44,6 +60,70 @@ public class Brand implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Byte getPermissionType() {
+        return permissionType;
+    }
+
+    public void setPermissionType(Byte permissionType) {
+        this.permissionType = permissionType;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getPermissionKey() {
+        return permissionKey;
+    }
+
+    public void setPermissionKey(String permissionKey) {
+        this.permissionKey = permissionKey == null ? null : permissionKey.trim();
+    }
+
+    public Byte getSortNo() {
+        return sortNo;
+    }
+
+    public void setSortNo(Byte sortNo) {
+        this.sortNo = sortNo;
+    }
+
+    public Byte getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Byte parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getPermissionClass() {
+        return permissionClass;
+    }
+
+    public void setPermissionClass(String permissionClass) {
+        this.permissionClass = permissionClass == null ? null : permissionClass.trim();
+    }
+
+    public String getTargetPage() {
+        return targetPage;
+    }
+
+    public void setTargetPage(String targetPage) {
+        this.targetPage = targetPage == null ? null : targetPage.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Byte getStatus() {
@@ -95,6 +175,14 @@ public class Brand implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", code=").append(code);
         sb.append(", name=").append(name);
+        sb.append(", permissionType=").append(permissionType);
+        sb.append(", url=").append(url);
+        sb.append(", permissionKey=").append(permissionKey);
+        sb.append(", sortNo=").append(sortNo);
+        sb.append(", parentId=").append(parentId);
+        sb.append(", permissionClass=").append(permissionClass);
+        sb.append(", targetPage=").append(targetPage);
+        sb.append(", description=").append(description);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

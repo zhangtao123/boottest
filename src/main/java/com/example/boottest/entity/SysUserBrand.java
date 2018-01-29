@@ -3,22 +3,18 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class SysUserBrand implements Serializable {
     private Long id;
 
-    private String code;
+    private Long userId;
 
-    private String name;
+    private Long brandId;
 
     private Byte status;
 
     private String createUser;
 
     private Date createTime;
-
-    private String lastUpdateUser;
-
-    private Date lastUpdateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,20 +26,20 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public Long getBrandId() {
+        return brandId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
     public Byte getStatus() {
@@ -70,22 +66,6 @@ public class Brand implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getLastUpdateUser() {
-        return lastUpdateUser;
-    }
-
-    public void setLastUpdateUser(String lastUpdateUser) {
-        this.lastUpdateUser = lastUpdateUser == null ? null : lastUpdateUser.trim();
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,13 +73,11 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", userId=").append(userId);
+        sb.append(", brandId=").append(brandId);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);
-        sb.append(", lastUpdateUser=").append(lastUpdateUser);
-        sb.append(", lastUpdateTime=").append(lastUpdateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

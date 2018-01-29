@@ -3,12 +3,14 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class SysRole implements Serializable {
     private Long id;
 
     private String code;
 
     private String name;
+
+    private String remark;
 
     private Byte status;
 
@@ -44,6 +46,14 @@ public class Brand implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public Byte getStatus() {
@@ -95,6 +105,7 @@ public class Brand implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", code=").append(code);
         sb.append(", name=").append(name);
+        sb.append(", remark=").append(remark);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

@@ -1,14 +1,19 @@
 package com.example.boottest.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class TemplateContentInvolve implements Serializable {
     private Long id;
 
-    private String code;
+    private String templateSkodaId;
 
-    private String name;
+    private Long templateContentId;
+
+    private BigDecimal weight;
+
+    private String isInvolve;
 
     private Byte status;
 
@@ -30,20 +35,36 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getTemplateSkodaId() {
+        return templateSkodaId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setTemplateSkodaId(String templateSkodaId) {
+        this.templateSkodaId = templateSkodaId == null ? null : templateSkodaId.trim();
     }
 
-    public String getName() {
-        return name;
+    public Long getTemplateContentId() {
+        return templateContentId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setTemplateContentId(Long templateContentId) {
+        this.templateContentId = templateContentId;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public String getIsInvolve() {
+        return isInvolve;
+    }
+
+    public void setIsInvolve(String isInvolve) {
+        this.isInvolve = isInvolve == null ? null : isInvolve.trim();
     }
 
     public Byte getStatus() {
@@ -93,8 +114,10 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
+        sb.append(", templateSkodaId=").append(templateSkodaId);
+        sb.append(", templateContentId=").append(templateContentId);
+        sb.append(", weight=").append(weight);
+        sb.append(", isInvolve=").append(isInvolve);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);

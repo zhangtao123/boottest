@@ -3,12 +3,18 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Brand implements Serializable {
+public class DealerRegion implements Serializable {
     private Long id;
+
+    private Long brandId;
 
     private String code;
 
     private String name;
+
+    private Byte parentId;
+
+    private Byte sort;
 
     private Byte status;
 
@@ -30,6 +36,14 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
     public String getCode() {
         return code;
     }
@@ -44,6 +58,22 @@ public class Brand implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Byte getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Byte parentId) {
+        this.parentId = parentId;
+    }
+
+    public Byte getSort() {
+        return sort;
+    }
+
+    public void setSort(Byte sort) {
+        this.sort = sort;
     }
 
     public Byte getStatus() {
@@ -93,8 +123,11 @@ public class Brand implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", brandId=").append(brandId);
         sb.append(", code=").append(code);
         sb.append(", name=").append(name);
+        sb.append(", parentId=").append(parentId);
+        sb.append(", sort=").append(sort);
         sb.append(", status=").append(status);
         sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);
