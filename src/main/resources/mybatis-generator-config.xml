@@ -48,7 +48,7 @@
                              targetPackage="com.example.boottest.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table tableName="brand" domainObjectName="Brand"/>
+        <table tableName="brand"/>
         <table tableName="check_detail_result"/>
         <table tableName="check_item_result"/>
         <table tableName="comp_result"/>
