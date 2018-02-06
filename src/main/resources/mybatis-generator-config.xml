@@ -10,9 +10,9 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- genenat entity时,生成toString -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
-        <!-- 开启支持内存分页   可生成 支持内存分布的方法及参数  
+        <!-- 开启支持内存分页   可生成 支持内存分布的方法及参数
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
-        -->
+          -->
         <!-- generate entity时，生成hashcode和equals方法
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 		 -->
@@ -48,27 +48,49 @@
                              targetPackage="com.example.boottest.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table tableName="brand" domainObjectName="Brand"/>
-        <table tableName="check_detail_result"/>
-        <table tableName="check_item_result"/>
-        <table tableName="comp_result"/>
-        <table tableName="dealer"/>
-        <table tableName="dealer_region"/>
-        <table tableName="mission"/>
-        <table tableName="mission_schedual"/>
-        <table tableName="sys_code"/>
-        <table tableName="sys_code_detail"/>
-        <table tableName="sys_permission"/>
-        <table tableName="sys_role"/>
-        <table tableName="sys_role_permission"/>
-        <table tableName="sys_seq"/>
-        <table tableName="sys_user"/>
-        <table tableName="sys_user_brand"/>
-        <table tableName="sys_user_role"/>
-        <table tableName="template"/>
-        <table tableName="template_content"/>
-        <table tableName="template_content_detail"/>
-        <table tableName="template_content_involve"/>
-        <table tableName="template_skoda"/>
+        <table tableName="brand" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="check_detail_result" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="check_item_result" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="comp_result" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="dealer" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="dealer_region" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="mission" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="mission_schedual" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_code" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_code_detail" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_permission" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_role" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_role_permission" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_seq" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_user" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_user_brand" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sys_user_role" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="template" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="template_content" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="template_content_detail" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="template_content_involve" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="template_skoda" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>
