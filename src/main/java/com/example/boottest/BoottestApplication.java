@@ -3,13 +3,16 @@ package com.example.boottest;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("com.example.boottest.dao")
+@ComponentScan
 public class BoottestApplication {
     public static void main(String[] args) {
+        System.getProperties().put("projectName","springApp");
         SpringApplication.run(BoottestApplication.class, args);
     }
 }
