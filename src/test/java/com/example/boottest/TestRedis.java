@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -68,5 +69,15 @@ public class TestRedis {
         for (int i = 0; i < missionList.size(); i++) {
             System.out.println(missionList.get(i).getId().equals(listOperations.index(LIST_KEY, i).getId()));
         }
+    }
+
+    @Test
+    public void testMissionList() {
+        List<Mission> missionList = missionDao.selectAllMissions();
+        List<Mission> missions = listOperations.range(LIST_KEY, 0, missionList.size() - 1);
+        System.out.println(missionList.size() == missions.size());
+        redisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);
+        System.out.println(redisTemplate.getExpire(LIST_KEY));
+        System.out.println(listOperations.index(LIST_KEY, 0));
     }
 }
