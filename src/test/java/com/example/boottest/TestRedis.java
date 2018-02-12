@@ -7,14 +7,13 @@ import com.example.boottest.entity.Mission;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SetOperations;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -30,12 +29,18 @@ public class TestRedis {
     @Resource
     private ListOperations<String, Mission> listOperations;
     @Resource
+    private HashOperations<String, String, Dealer> hashOperations;
+    @Resource
+    private ZSetOperations<String, Mission> zSetOperations;
+    @Resource
     private DealerDao dealerDao;
     @Resource
     private MissionDao missionDao;
     private static final String STRING_KEY = "testString";
     private static final String SET_KEY = "testSet";
     private static final String LIST_KEY = "testList";
+    private static final String HASH_KEY = "testHash";
+    private static final String ZSET_KEY="testZSet";
 
     @Test
     public void testString() {
@@ -76,8 +81,30 @@ public class TestRedis {
         List<Mission> missionList = missionDao.selectAllMissions();
         List<Mission> missions = listOperations.range(LIST_KEY, 0, missionList.size() - 1);
         System.out.println(missionList.size() == missions.size());
-        redisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);
+        redisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);//此处要做期限设置，没有成功
         System.out.println(redisTemplate.getExpire(LIST_KEY));
         System.out.println(listOperations.index(LIST_KEY, 0));
+    }
+
+    @Test
+    public void testHash() {
+        List<Dealer> dealerList = dealerDao.selectAllDealers();
+        dealerList.forEach(dealer -> hashOperations.put(HASH_KEY, dealer.getCode(), dealer));
+        Dealer dealer = hashOperations.get(HASH_KEY, dealerList.get(0).getCode());
+        System.out.println(dealer);
+        hashOperations.delete(HASH_KEY, dealerList.get(0).getCode());
+        boolean flag = hashOperations.hasKey(HASH_KEY, dealerList.get(0).getCode());
+        System.out.println(flag);
+        Map<String, Dealer> dealerMap = hashOperations.entries(HASH_KEY);
+        dealerMap.forEach((code, d) -> System.out.println(code + ":" + d.getCode()));
+    }
+    @Test
+    public void testZSet(){
+        List<Mission> missionList=missionDao.selectAllMissions();
+        Assert.notEmpty(missionList,"任务集合不能为空");
+        for(Long i=0L;i<missionList.size();i++){
+            zSetOperations.add(ZSET_KEY,missionList.get(i.intValue()),i);
+        }
+        System.out.println(zSetOperations.score(ZSET_KEY,missionList.get(1)));
     }
 }
