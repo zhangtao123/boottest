@@ -2,6 +2,8 @@ package com.example.boottest.dao;
 
 import com.example.boottest.entity.Dealer;
 
+import java.util.List;
+
 public interface DealerDao {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface DealerDao {
     int updateByPrimaryKeySelective(Dealer record);
 
     int updateByPrimaryKey(Dealer record);
+
+    List<Dealer> selectAllDealers();
 }

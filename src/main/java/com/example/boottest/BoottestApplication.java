@@ -9,10 +9,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("com.example.boottest.dao")
-@ComponentScan
 public class BoottestApplication {
     public static void main(String[] args) {
-        System.getProperties().put("projectName","springApp");
         SpringApplication.run(BoottestApplication.class, args);
     }
 }

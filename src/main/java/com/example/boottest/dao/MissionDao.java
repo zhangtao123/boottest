@@ -2,6 +2,8 @@ package com.example.boottest.dao;
 
 import com.example.boottest.entity.Mission;
 
+import java.util.List;
+
 public interface MissionDao {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface MissionDao {
     int updateByPrimaryKeySelective(Mission record);
 
     int updateByPrimaryKey(Mission record);
+
+    List<Mission> selectAllMissions();
 }
