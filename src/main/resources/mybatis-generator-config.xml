@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
     <classPathEntry
-            location="C:\\Users\\Yibo\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.44\\mysql-connector-java-5.1.44.jar"/>
+            location="/Users/yibo/.m2/repository/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar"/>
     <context id="testTables" targetRuntime="MyBatis3">
         <!-- JavaBean 实现 序列化 接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
