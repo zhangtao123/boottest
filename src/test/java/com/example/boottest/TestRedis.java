@@ -6,6 +6,8 @@ import com.example.boottest.entity.Dealer;
 import com.example.boottest.entity.Mission;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.*;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -41,17 +43,17 @@ public class TestRedis {
     private static final String LIST_KEY = "testList";
     private static final String HASH_KEY = "testHash";
     private static final String ZSET_KEY="testZSet";
-
+    private Logger logger= LoggerFactory.getLogger(TestRedis.class);
     @Test
     public void testString() {
         valueOperations.set(STRING_KEY, "zhangsan");
         String s = valueOperations.get(STRING_KEY);
-        System.out.println("新增:" + s);
+        logger.info("新增:" + s);
         valueOperations.set(STRING_KEY, "lisi");
         s = valueOperations.get(STRING_KEY);
-        System.out.println("修改:" + s);
+        logger.info("修改:" + s);
         redisTemplate.delete(STRING_KEY);
-        System.out.println(redisTemplate.hasKey(STRING_KEY));
+        logger.info("删除所以返回false",redisTemplate.hasKey(STRING_KEY));
     }
 
     @Test
