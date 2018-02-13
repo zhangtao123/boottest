@@ -4,12 +4,15 @@ import com.example.boottest.dao.DealerDao;
 import com.example.boottest.dao.MissionDao;
 import com.example.boottest.entity.Dealer;
 import com.example.boottest.entity.Mission;
+import com.example.boottest.entity.RedisModel;
+import com.example.boottest.service.impl.RedisServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
@@ -25,6 +28,8 @@ public class TestRedis {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
+    private StringRedisTemplate stringRedisTemplate;
+    @Resource
     private ValueOperations<String, String> valueOperations;
     @Resource
     private SetOperations<String, Dealer> setOperations;
@@ -38,6 +43,8 @@ public class TestRedis {
     private DealerDao dealerDao;
     @Resource
     private MissionDao missionDao;
+    @Resource
+    private RedisServiceImpl redisService;
     private static final String STRING_KEY = "testString";
     private static final String SET_KEY = "testSet";
     private static final String LIST_KEY = "testList";
@@ -53,7 +60,7 @@ public class TestRedis {
         s = valueOperations.get(STRING_KEY);
         logger.info("修改:" + s);
         redisTemplate.delete(STRING_KEY);
-        logger.info("删除所以返回false",redisTemplate.hasKey(STRING_KEY));
+        logger.info(redisTemplate.hasKey(STRING_KEY).toString());
     }
 
     @Test
@@ -83,9 +90,9 @@ public class TestRedis {
         List<Mission> missionList = missionDao.selectAllMissions();
         List<Mission> missions = listOperations.range(LIST_KEY, 0, missionList.size() - 1);
         System.out.println(missionList.size() == missions.size());
-        redisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);//此处要做期限设置，没有成功
-        System.out.println(redisTemplate.getExpire(LIST_KEY));
-        System.out.println(listOperations.index(LIST_KEY, 0));
+        stringRedisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);//此处要做期限设置，没有成功
+        System.out.println(stringRedisTemplate.getExpire(LIST_KEY));
+        stringRedisTemplate.keys("*").forEach(System.out::println);
     }
 
     @Test
@@ -108,5 +115,26 @@ public class TestRedis {
             zSetOperations.add(ZSET_KEY,missionList.get(i.intValue()),i);
         }
         System.out.println(zSetOperations.score(ZSET_KEY,missionList.get(1)));
+        stringRedisTemplate.expire(ZSET_KEY,10L,TimeUnit.SECONDS);
+    }
+    @Test
+    public void testDel(){
+        List<RedisClientInfo> clientList = redisTemplate.getClientList();
+        clientList.forEach(System.out::println);
+        Set<String> keys = stringRedisTemplate.keys("*");
+        keys.forEach(System.out::println);
+        stringRedisTemplate.delete(keys);
+    }
+    @Test
+    public void testRedisService() throws InterruptedException {
+        RedisModel redisModel=new RedisModel();
+        redisModel.setRedisKey("testService");
+        redisModel.setAddress("上海");
+        redisModel.setName("Alice");
+        redisModel.setTel("131231311");
+        redisService.put(redisModel.getRedisKey(),redisModel,10L);
+        Thread.sleep(11*1000L);
+        Assert.isNull(redisService.get(redisModel.getRedisKey()),"过了10秒应该是空的！");
+        System.out.println("还有人吗？");
     }
 }
