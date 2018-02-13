@@ -47,8 +47,9 @@ public class TestRedis {
     private static final String SET_KEY = "testSet";
     private static final String LIST_KEY = "testList";
     private static final String HASH_KEY = "testHash";
-    private static final String ZSET_KEY="testZSet";
-    private Logger logger= LoggerFactory.getLogger(TestRedis.class);
+    private static final String ZSET_KEY = "testZSet";
+    private Logger logger = LoggerFactory.getLogger(TestRedis.class);
+
     @Test
     public void testString() {
         valueOperations.set(STRING_KEY, "zhangsan");
@@ -108,35 +109,38 @@ public class TestRedis {
         dealerMap.forEach((code, d) -> System.out.println(code + ":" + d.getCode()));
         redisTemplate.delete(HASH_KEY);
     }
+
     @Test
-    public void testZSet(){
-        List<Mission> missionList=missionDao.selectAllMissions();
-        Assert.notEmpty(missionList,"任务集合不能为空");
-        for(Long i=0L;i<missionList.size();i++){
-            zSetOperations.add(ZSET_KEY,missionList.get(i.intValue()),i);
+    public void testZSet() {
+        List<Mission> missionList = missionDao.selectAllMissions();
+        Assert.notEmpty(missionList, "任务集合不能为空");
+        for (Long i = 0L; i < missionList.size(); i++) {
+            zSetOperations.add(ZSET_KEY, missionList.get(i.intValue()), i);
         }
-        System.out.println(zSetOperations.score(ZSET_KEY,missionList.get(1)));
-        redisTemplate.expire(ZSET_KEY,10L,TimeUnit.SECONDS);
+        System.out.println(zSetOperations.score(ZSET_KEY, missionList.get(1)));
+        redisTemplate.expire(ZSET_KEY, 10L, TimeUnit.SECONDS);
         redisTemplate.delete(HASH_KEY);
     }
+
     @Test
-    public void testDel(){
+    public void testDel() {
         List<RedisClientInfo> clientList = redisTemplate.getClientList();
         clientList.forEach(System.out::println);
         Set<String> keys = redisTemplate.keys("*");
         keys.forEach(System.out::println);
         redisTemplate.delete(keys);
     }
+
     @Test
     public void testRedisService() throws InterruptedException {
-        RedisModel redisModel=new RedisModel();
+        RedisModel redisModel = new RedisModel();
         redisModel.setRedisKey("testService");
         redisModel.setAddress("上海");
         redisModel.setName("Alice");
         redisModel.setTel("131231311");
-        redisService.put(redisModel.getRedisKey(),redisModel,10L);
-        Thread.sleep(11*1000L);
-        Assert.isNull(redisService.get(redisModel.getRedisKey()),"过了10秒应该是空的！");
+        redisService.put(redisModel.getRedisKey(), redisModel, 10L);
+        Thread.sleep(11 * 1000L);
+        Assert.isNull(redisService.get(redisModel.getRedisKey()), "过了10秒应该是空的！");
         System.out.println("还有人吗？");
     }
 }

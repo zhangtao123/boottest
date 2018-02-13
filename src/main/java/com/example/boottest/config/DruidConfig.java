@@ -67,7 +67,7 @@ public class DruidConfig {
     private String logSlowSql;
 
     @Bean
-    public ServletRegistrationBean druidServlet() {
+    public ServletRegistrationBean servletRegistrationBean() {
         ServletRegistrationBean reg = new ServletRegistrationBean();
         reg.setServlet(new StatViewServlet());
         reg.addUrlMappings("/druid/*");
@@ -89,7 +89,7 @@ public class DruidConfig {
 
     @Bean
     @Primary
-    public DataSource druidDataSource() {
+    public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dbUrl);
         datasource.setUsername(username);
