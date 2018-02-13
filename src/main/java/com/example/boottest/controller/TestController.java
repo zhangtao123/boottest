@@ -2,20 +2,19 @@ package com.example.boottest.controller;
 
 import com.example.boottest.entity.RedisModel;
 import com.example.boottest.service.impl.RedisServiceImpl;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@Controller
+@RestController
 public class TestController {
     @Resource
     private RedisServiceImpl service;
+
     //添加
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    @ResponseBody
     public void test() {
         System.out.println("start.....");
         RedisModel m = new RedisModel();
@@ -44,21 +43,18 @@ public class TestController {
 
     //查询所有对象
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    @ResponseBody
     public Object getAll() {
         return service.getAll();
     }
 
     //查询所有key
     @RequestMapping(value = "/getKeys", method = RequestMethod.GET)
-    @ResponseBody
     public Object getKeys() {
         return service.getKeys();
     }
 
     //根据key查询
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    @ResponseBody
     public Object get() {
         RedisModel m = new RedisModel();
         m.setRedisKey("zhangsanKey02");
@@ -67,7 +63,6 @@ public class TestController {
 
     //删除
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
-    @ResponseBody
     public void remove() {
         RedisModel m = new RedisModel();
         m.setRedisKey("zhangsanKey01");
@@ -76,24 +71,21 @@ public class TestController {
 
     //判断key是否存在
     @RequestMapping(value = "/isKeyExists", method = RequestMethod.GET)
-    @ResponseBody
     public void isKeyExists() {
         RedisModel m = new RedisModel();
         m.setRedisKey("zhangsanKey01");
         boolean flag = service.isKeyExists(m.getRedisKey());
-        System.out.println("zhangsanKey01 是否存在: "+flag);
+        System.out.println("zhangsanKey01 是否存在: " + flag);
     }
 
     //查询当前缓存的数量
     @RequestMapping(value = "/count", method = RequestMethod.GET)
-    @ResponseBody
     public Object count() {
         return service.count();
     }
 
     //清空所有key
     @RequestMapping(value = "/empty", method = RequestMethod.GET)
-    @ResponseBody
     public void empty() {
         service.empty();
     }
