@@ -28,8 +28,6 @@ public class TestRedis {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
-    @Resource
     private ValueOperations<String, String> valueOperations;
     @Resource
     private SetOperations<String, Dealer> setOperations;
@@ -74,6 +72,7 @@ public class TestRedis {
         System.out.println(setOperations.isMember(SET_KEY, dealerList.get(0)));
         setOperations.remove(SET_KEY, dealerList.get(0));
         System.out.println(setOperations.isMember(SET_KEY, dealerList.get(0)));
+        redisTemplate.delete(SET_KEY);
     }
 
     @Test
@@ -83,6 +82,7 @@ public class TestRedis {
         for (int i = 0; i < missionList.size(); i++) {
             System.out.println(missionList.get(i).getId().equals(listOperations.index(LIST_KEY, i).getId()));
         }
+        redisTemplate.delete(LIST_KEY);
     }
 
     @Test
@@ -90,9 +90,9 @@ public class TestRedis {
         List<Mission> missionList = missionDao.selectAllMissions();
         List<Mission> missions = listOperations.range(LIST_KEY, 0, missionList.size() - 1);
         System.out.println(missionList.size() == missions.size());
-        stringRedisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);//此处要做期限设置，没有成功
-        System.out.println(stringRedisTemplate.getExpire(LIST_KEY));
-        stringRedisTemplate.keys("*").forEach(System.out::println);
+        redisTemplate.expire(LIST_KEY, 10L, TimeUnit.SECONDS);//此处要做期限设置，没有成功
+        System.out.println(redisTemplate.getExpire(LIST_KEY));
+        redisTemplate.keys("*").forEach(System.out::println);
     }
 
     @Test
@@ -106,6 +106,7 @@ public class TestRedis {
         System.out.println(flag);
         Map<String, Dealer> dealerMap = hashOperations.entries(HASH_KEY);
         dealerMap.forEach((code, d) -> System.out.println(code + ":" + d.getCode()));
+        redisTemplate.delete(HASH_KEY);
     }
     @Test
     public void testZSet(){
@@ -115,15 +116,16 @@ public class TestRedis {
             zSetOperations.add(ZSET_KEY,missionList.get(i.intValue()),i);
         }
         System.out.println(zSetOperations.score(ZSET_KEY,missionList.get(1)));
-        stringRedisTemplate.expire(ZSET_KEY,10L,TimeUnit.SECONDS);
+        redisTemplate.expire(ZSET_KEY,10L,TimeUnit.SECONDS);
+        redisTemplate.delete(HASH_KEY);
     }
     @Test
     public void testDel(){
         List<RedisClientInfo> clientList = redisTemplate.getClientList();
         clientList.forEach(System.out::println);
-        Set<String> keys = stringRedisTemplate.keys("*");
+        Set<String> keys = redisTemplate.keys("*");
         keys.forEach(System.out::println);
-        stringRedisTemplate.delete(keys);
+        redisTemplate.delete(keys);
     }
     @Test
     public void testRedisService() throws InterruptedException {

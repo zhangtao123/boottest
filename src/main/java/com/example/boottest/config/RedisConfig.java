@@ -23,22 +23,10 @@ public class RedisConfig {
      * 实例化 RedisTemplate 对象
      */
     @Bean
-    public RedisTemplate<String, Object> functionDomainRedisTemplate() {
+    public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         initDomainRedisTemplate(redisTemplate, redisConnectionFactory);
         return redisTemplate;
-    }
-
-    /**
-     * RedisTemplate用通配符查询所有Key，而StringRedisTemplate可以
-     *
-     * @return 返回一个 StringRedisTemplate对象
-     */
-    @Bean
-    public StringRedisTemplate stringRedisTemplate() {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
-        return stringRedisTemplate;
     }
 
     /**
