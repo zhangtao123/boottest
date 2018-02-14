@@ -3,7 +3,7 @@ package com.example.boottest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Message implements Serializable{
+public class Message implements Serializable {
     private static final long serialVersionUID = -473611148175388137L;
     private Long id;
     private String message;
