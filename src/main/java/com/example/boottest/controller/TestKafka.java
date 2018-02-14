@@ -1,7 +1,9 @@
 package com.example.boottest.controller;
 
 import com.example.boottest.component.Sender;
+import com.example.boottest.entity.Message;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -11,8 +13,8 @@ public class TestKafka {
     @Resource
     private Sender sender;
     @RequestMapping("/sendMsg")
-    public String sendMsg(){
+    public Object sendMsg(){
         sender.sendMessage();
-        return "发送成功";
+        return new Message();
     }
 }
