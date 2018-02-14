@@ -31,7 +31,6 @@ public class RedisConfig {
 
     /**
      * 设置数据存入 redis 的序列化方式
-     * 这里的Key和HashKey都是String所以用redisTemplate无法直接对其直接进行操作，得用stringRedisTemplate才可以
      */
     private void initDomainRedisTemplate(RedisTemplate<String, Object> redisTemplate, RedisConnectionFactory factory) {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
