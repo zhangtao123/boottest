@@ -33,4 +33,10 @@ public class TestJson {
             System.out.println(dealer);
         }
     }
+    @Test
+    public void testToObject(){
+        String a=JSONUtils.toJson(dealerDao.selectByPrimaryKey(2L));
+        Dealer dealer=JSONUtils.toObject(a,Dealer.class);
+        System.out.println(dealer);
+    }
 }

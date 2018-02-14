@@ -18,7 +18,7 @@ public class JSONUtils {
         return null;
     }
 
-    public static <T> Object toObject(String string, Class<T> type) {
+    public static <T> T toObject(String string, Class<T> type) {
         try {
             return objectMapper.readValue(string, type);
         } catch (IOException e) {
