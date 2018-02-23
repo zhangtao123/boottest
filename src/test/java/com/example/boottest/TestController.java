@@ -20,15 +20,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class TestController {
     @Resource
-    private WebApplicationContext context;
+    private WebApplicationContext webApplicationContext;
 
     @Test
     public void testKafka() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-        mockMvc.perform(get("/sendMsg"))
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        String result=mockMvc.perform(get("/sendMsg"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.valueOf("application/json;charset=UTF-8")))
                 .andExpect(content().encoding("UTF-8"))
-                .andDo(print());
+                .andReturn().getResponse().getContentAsString();
+        System.out.println(result);
     }
 }
