@@ -3,7 +3,7 @@ package com.example.boottest.component;
 import com.example.boottest.entity.Message;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import util.JSONUtils;
+import com.example.boottest.util.JSONUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
