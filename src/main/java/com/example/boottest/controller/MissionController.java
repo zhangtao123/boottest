@@ -1,4 +1,5 @@
 package com.example.boottest.controller;
+
 import com.example.boottest.entity.Mission;
 import com.example.boottest.service.MissionService;
 import org.springframework.web.bind.annotation.*;
@@ -18,34 +19,19 @@ public class MissionController {
 
     @PostMapping
     public Object addMission(@RequestBody Mission mission) {
-        try {
-            missionService.addMission(mission);
-            return "任务新增成功";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
+        missionService.addMission(mission);
+        return "任务新增成功";
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Object updateMission(@RequestBody Mission mission, @PathVariable Long id) {
-        try {
-            missionService.updateMission(mission, id);
-            return "任务修改成功";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
+        missionService.updateMission(mission, id);
+        return "任务修改成功";
     }
 
     @DeleteMapping("/{id}")
     public Object deleteMission(@PathVariable Long id) {
-        try {
-            missionService.deleteMission(id);
-            return "任务删除成功";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
+        missionService.deleteMission(id);
+        return "任务删除成功";
     }
 }
