@@ -48,18 +48,18 @@ public class TestRedis {
     private static final String LIST_KEY = "testList";
     private static final String HASH_KEY = "testHash";
     private static final String ZSET_KEY = "testZSet";
-    private Logger logger = LoggerFactory.getLogger(TestRedis.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestRedis.class);
 
     @Test
     public void testString() {
         valueOperations.set(STRING_KEY, "zhangsan");
         String s = valueOperations.get(STRING_KEY);
-        logger.info("新增:" + s);
+        LOGGER.info("新增:" + s);
         valueOperations.set(STRING_KEY, "lisi");
         s = valueOperations.get(STRING_KEY);
-        logger.info("修改:" + s);
+        LOGGER.info("修改:" + s);
         redisTemplate.delete(STRING_KEY);
-        logger.info(redisTemplate.hasKey(STRING_KEY).toString());
+        LOGGER.info(redisTemplate.hasKey(STRING_KEY).toString());
     }
 
     @Test
