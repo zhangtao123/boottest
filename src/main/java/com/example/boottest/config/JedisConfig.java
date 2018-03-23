@@ -3,7 +3,6 @@ package com.example.boottest.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -27,6 +26,8 @@ public class JedisConfig {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
+        jedisPoolConfig.setTestOnBorrow(true);
+        jedisPoolConfig.setTestOnReturn(true);
         jedisPoolConfig.setMaxWaitMillis(Long.parseLong(maxWait.substring(0, maxWait.length() - 2)));
         return jedisPoolConfig;
     }
@@ -34,10 +35,5 @@ public class JedisConfig {
     @Bean
     public JedisPool jedisPool() {
         return new JedisPool(jedisPoolConfig(), host, port, Integer.parseInt(maxWait.substring(0, maxWait.length() - 2)), null, database);
-    }
-
-    @Bean
-    public Jedis jedis() {
-        return jedisPool().getResource();
     }
 }
