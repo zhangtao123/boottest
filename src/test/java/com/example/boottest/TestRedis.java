@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -43,6 +44,8 @@ public class TestRedis {
     private MissionDao missionDao;
     @Resource
     private RedisServiceImpl redisService;
+    @Resource
+    private Jedis jedis;
     private static final String STRING_KEY = "testString";
     private static final String SET_KEY = "testSet";
     private static final String LIST_KEY = "testList";
@@ -60,6 +63,11 @@ public class TestRedis {
         LOGGER.info("修改:" + s);
         redisTemplate.delete(STRING_KEY);
         LOGGER.info(redisTemplate.hasKey(STRING_KEY).toString());
+    }
+
+    @Test
+    public void testJedis() {
+        System.out.println(jedis.exists(STRING_KEY));
     }
 
     @Test
