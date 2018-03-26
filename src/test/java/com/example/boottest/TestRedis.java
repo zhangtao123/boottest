@@ -4,8 +4,6 @@ import com.example.boottest.dao.DealerDao;
 import com.example.boottest.dao.MissionDao;
 import com.example.boottest.entity.Dealer;
 import com.example.boottest.entity.Mission;
-import com.example.boottest.entity.RedisModel;
-import com.example.boottest.service.impl.RedisServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -41,8 +39,6 @@ public class TestRedis {
     private DealerDao dealerDao;
     @Resource
     private MissionDao missionDao;
-    @Resource
-    private RedisServiceImpl redisService;
 
     private static final String STRING_KEY = "testString";
     private static final String SET_KEY = "testSet";
@@ -130,18 +126,5 @@ public class TestRedis {
         Set<String> keys = redisTemplate.keys("*");
         keys.forEach(System.out::println);
         redisTemplate.delete(keys);
-    }
-
-    @Test
-    public void testRedisService() throws InterruptedException {
-        RedisModel redisModel = new RedisModel();
-        redisModel.setRedisKey("testService");
-        redisModel.setAddress("上海");
-        redisModel.setName("Alice");
-        redisModel.setTel("131231311");
-        redisService.put(redisModel.getRedisKey(), redisModel, 10L);
-        Thread.sleep(11 * 1000L);
-        Assert.isNull(redisService.get(redisModel.getRedisKey()), "过了10秒应该是空的！");
-        System.out.println("还有人吗？");
     }
 }
