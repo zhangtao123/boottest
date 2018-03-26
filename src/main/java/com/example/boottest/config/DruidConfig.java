@@ -23,7 +23,7 @@ public class DruidConfig {
     private String driverClassName;
 
     @Bean
-    public ServletRegistrationBean servletRegistrationBean() {
+    public ServletRegistrationBean<StatViewServlet> servletRegistrationBean() {
         ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>();
         servletRegistrationBean.setServlet(new StatViewServlet());
         servletRegistrationBean.addUrlMappings("/druid/*");
@@ -33,7 +33,7 @@ public class DruidConfig {
     }
 
     @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
+    public FilterRegistrationBean<WebStatFilter> filterRegistrationBean() {
         FilterRegistrationBean<WebStatFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
