@@ -1,5 +1,6 @@
-package com.example.boottest.invocation;
+package com.example.boottest;
 
+import com.example.boottest.invocation.UserServiceInvocationHandler;
 import com.example.boottest.service.UserService;
 import com.example.boottest.service.impl.UserServiceImpl;
 import org.junit.Test;
