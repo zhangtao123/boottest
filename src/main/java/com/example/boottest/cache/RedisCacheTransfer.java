@@ -1,19 +1,20 @@
 package com.example.boottest.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 
-@Component
+@Configuration
 public class RedisCacheTransfer {
-    @Autowired
+    @Resource
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         MybatisRedisCache.setRedisTemplate(redisTemplate);
     }
 
-    @Autowired
+    @Resource
     public void setValueOperations(ValueOperations<String, Object> valueOperations) {
         MybatisRedisCache.setValueOperations(valueOperations);
     }
