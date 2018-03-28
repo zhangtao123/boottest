@@ -35,6 +35,9 @@ spring:
         min-idle: 50
         max-wait: 100000ms
     timeout: 3000ms
+    host: localhost
+    port: 6379
+    database: 0
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
