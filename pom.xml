@@ -7,7 +7,6 @@
     <artifactId>boottest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>boottest</name>
     <description>Demo project for Spring Boot</description>
 
@@ -17,7 +16,6 @@
         <version>2.0.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
 
     <properties>
         <skipTests>true</skipTests>
@@ -85,4 +83,12 @@
             <version>${swagger2.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
