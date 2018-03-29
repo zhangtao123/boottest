@@ -20,11 +20,11 @@ public class MybatisRedisCache implements Cache {
     private static RedisTemplate<String, Object> redisTemplate;
     private static ValueOperations<String, Object> valueOperations;
 
-    public static void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+    static void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         MybatisRedisCache.redisTemplate = redisTemplate;
     }
 
-    public static void setValueOperations(ValueOperations<String, Object> valueOperations) {
+    static void setValueOperations(ValueOperations<String, Object> valueOperations) {
         MybatisRedisCache.valueOperations = valueOperations;
     }
 
