@@ -9,13 +9,20 @@ Spring Cloud首页
 <br/>
 <form>
     任务ID<input type="text" id="missionId" title="ID"/>
+    <br/>
     任务名<input type="text" id="missionName" title="name"/>
+    <br/>
     品牌ID<input type="text" id="brandId" title="brandId"/>
+    <br/>
     问卷ID<input type="text" id="templateId" title="templateId"/>
+    <br/>
 </form>
 <button onclick="getMission()">查询任务名</button>
+<br/>
 <button onclick="addMission()">新增任务</button>
+<br/>
 <button onclick="updateMission()">修改任务</button>
+<br/>
 <button onclick="deleteMission()">删除任务</button>
 <br/>
 <div id="1"></div>
@@ -29,7 +36,11 @@ Spring Cloud首页
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 let str = xmlHttp.responseText;
                 let mission = JSON.parse(str);
-                document.getElementById("1").innerHTML = mission.missionName;
+                document.getElementById("1").innerHTML =
+                    mission.id + ":" +
+                    mission.missionName + ":" +
+                    mission.brandId + ":" +
+                    mission.templateId;
             } else {
                 let error = JSON.parse(xmlHttp.responseText);
                 document.getElementById("1").innerHTML = error.message;
