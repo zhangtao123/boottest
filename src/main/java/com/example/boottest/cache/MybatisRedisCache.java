@@ -69,6 +69,7 @@ public class MybatisRedisCache implements Cache {
             c.flushDb();
             c.flushAll();
             c.close();
+            LOGGER.info("Redis缓存已清空");
             return 1L;
         });
     }
