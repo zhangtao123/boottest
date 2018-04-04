@@ -1,13 +1,14 @@
 package com.example.boottest.entity;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Mission implements Serializable {
     private Long id;
-
+    @NotNull(message = "品牌ID不能为空")
     private Long brandId;
-
+    @NotNull(message = "问卷ID不能为空")
     private Long templateId;
 
     private Long brandTemplateId;

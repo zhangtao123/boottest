@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/mission")
@@ -23,7 +24,7 @@ public class MissionController {
     }
 
     @PostMapping
-    public Object addMission(@RequestBody Mission mission) {
+    public Object addMission(@Valid @RequestBody Mission mission) {
         missionService.addMission(mission);
         return "任务新增成功";
     }
