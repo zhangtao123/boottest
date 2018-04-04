@@ -28,8 +28,8 @@ Spring Cloud首页
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 let str = xmlHttp.responseText;
-                let misson = JSON.parse(str);
-                document.getElementById("1").innerHTML = misson.missionName;
+                let mission = JSON.parse(str);
+                document.getElementById("1").innerHTML = mission.missionName;
             } else {
                 let error = JSON.parse(xmlHttp.responseText);
                 document.getElementById("1").innerHTML = error.message;
