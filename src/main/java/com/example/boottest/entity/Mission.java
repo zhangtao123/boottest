@@ -1,5 +1,6 @@
 package com.example.boottest.entity;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,7 +19,7 @@ public class Mission implements Serializable {
     private String year;
 
     private String season;
-
+    @NotBlank(message = "任务名字不能为空")
     private String missionName;
 
     private String description;
