@@ -1,3 +1,4 @@
+/*
 package com.example.boottest.controller;
 
 import com.example.boottest.component.Sender;
@@ -17,4 +18,4 @@ public class TestKafka {
         sender.sendMessage();
         return new Message();
     }
-}
+}*/

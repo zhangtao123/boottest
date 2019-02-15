@@ -1,3 +1,4 @@
+/*
 package com.example.boottest.component;
 
 import com.example.boottest.entity.Message;
@@ -21,4 +22,4 @@ public class Sender {
         m.setSendTime(new Date());
         kafkaTemplate.send("test", JSONUtils.toJson(m));
     }
-}
+}*/

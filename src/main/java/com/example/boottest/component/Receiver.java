@@ -1,3 +1,4 @@
+/*
 package com.example.boottest.component;
 
 import com.example.boottest.entity.Message;
@@ -11,4 +12,4 @@ public class Receiver {
     public void processMessage(String content) {
         System.out.println(JSONUtils.toObject(content, Message.class));
     }
-}
+}*/
