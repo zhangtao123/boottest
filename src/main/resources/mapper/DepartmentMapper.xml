@@ -39,4 +39,13 @@
   <update id="update" parameterType="com.example.boottest.entity.Department">
     update Department set name = #{name} where id = #{id}
   </update>
+
+
+  <select id="selectDepartment" parameterType="ArrayList" resultType="com.example.boottest.entity.Department">
+    select * from Department where
+     id in
+    <foreach collection="idList" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
 </mapper>

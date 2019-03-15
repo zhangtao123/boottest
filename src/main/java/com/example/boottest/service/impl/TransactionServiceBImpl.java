@@ -15,6 +15,9 @@ import javax.annotation.Resource;
  * @Author: zhangtao
  * @CreateDate: 2019/2/15 13:36
  * @Version: 1.0
+ * <p>
+ * <p>
+ * NESTED:如果子方法事务为NESTED，子方法抛出异常后，回滚到
  */
 @Service("transactionServiceBImpl")
 public class TransactionServiceBImpl implements TransactionServiceB {
@@ -23,6 +26,7 @@ public class TransactionServiceBImpl implements TransactionServiceB {
     LogsMapper logsMapper;
 
     @Override
+    //@Transactional(propagation = Propagation.NESTED)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public String updateDepartment(Logs log) throws RuntimeException {
         logsMapper.insert(log);

@@ -56,3 +56,5 @@ logging:
     com.example.boottest.dao: debug
 server:
   port: 8081
+
+url: www.baidu.com
