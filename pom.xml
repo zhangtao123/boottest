@@ -5,11 +5,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>boottest</artifactId>
-<<<<<<< HEAD
-    <version>0.0.2-SNAPSHOT</version>
-=======
     <version>1.3.0-SNAPSHOT</version>
->>>>>>> dev
     <packaging>war</packaging>
     <name>boottest</name>
     <description>Demo project for Spring Boot</description>
